@@ -7,11 +7,12 @@ defmodule ThriftExample.MixProject do
       version: "0.1.0",
       elixir: "~> 1.6",
       start_permanent: Mix.env() == :prod,
+      compilers: [:thrift | Mix.compilers()],
+      thrift: thrift(),
       deps: deps()
     ]
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger],
@@ -19,11 +20,20 @@ defmodule ThriftExample.MixProject do
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"},
+      {:dialyxir, "~> 0.5"},
+      {:credo, "~>  0.9.0-rc7"},
+      {:thrift, github: "CultivateHQ/elixir-thrift"}
+    ]
+  end
+
+  defp thrift do
+    [
+      thrift: [
+        files: Path.wildcard("thrift/**/*.thrift"),
+        output_path: "lib/generated"
+      ]
     ]
   end
 end
