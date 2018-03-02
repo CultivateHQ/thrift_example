@@ -24,8 +24,7 @@ defmodule ThriftExample.MixProject do
     [
       {:dialyxir, "~> 0.5"},
       {:credo, "~>  0.9.0-rc7"},
-      # {:thrift, github: "CultivateHQ/elixir-thrift"}
-      {:thrift, github: "pinterest/elixir-thrift"}
+      {:thrift, github: "CultivateHQ/elixir-thrift"}
     ]
   end
 

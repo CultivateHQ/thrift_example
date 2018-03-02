@@ -6,10 +6,10 @@ defmodule ThriftExample.Application do
   use Application
 
   def start(_type, _args) do
-    # List all child processes to be supervised
+    import Supervisor.Spec
+
     children = [
-      # Starts a worker by calling: ThriftExample.Worker.start_link(arg)
-      # {ThriftExample.Worker, arg},
+      worker(Thrift.Test.UserService.Binary.Framed.Server, [ThriftExample.Server, 2345, []])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
