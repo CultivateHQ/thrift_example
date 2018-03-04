@@ -1,6 +1,4 @@
 defmodule ThriftExample do
-  alias Thrift.Test.UserService.Binary.Framed.Client
-
   @moduledoc """
   Documentation for ThriftExample.
   """
@@ -18,7 +16,8 @@ defmodule ThriftExample do
     :world
   end
 
-  def start_client do
-    Client.start_link("localhost", 2345, tcp_opts: [], gen_server_opts: [timeout: 10_000])
-  end
+  # def start_client do
+  #   Client.start_link("localhost", 2345, tcp_opts: [], gen_server_opts: [timeout: 10_000])
+  #   alias Thrift.Test.UserService.Binary.Framed.Client
+  # end
 end

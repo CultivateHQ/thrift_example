@@ -9,7 +9,7 @@ defmodule ThriftExample.Application do
     import Supervisor.Spec
 
     children = [
-      worker(Thrift.Test.UserService.Binary.Framed.Server, [ThriftExample.Server, 2345, []])
+      # worker(Thrift.Test.UserService.Binary.Framed.Server, [ThriftExample.Server, 2345, []])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

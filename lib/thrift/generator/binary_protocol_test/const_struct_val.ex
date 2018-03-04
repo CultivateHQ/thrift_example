@@ -1,7 +1,7 @@
-defmodule(Thrift.Test.UserNotFound) do
-  _ = "Auto-generated Thrift exception user.UserNotFound"
-  _ = "1: string message"
-  defexception(message: nil)
+defmodule(Thrift.Generator.BinaryProtocolTest.ConstStructVal) do
+  _ = "Auto-generated Thrift struct const.ConstStructVal"
+  _ = "1: i8 num"
+  defstruct(num: nil)
   @type(t :: %__MODULE__{})
   def(new) do
     %__MODULE__{}
@@ -9,13 +9,13 @@ defmodule(Thrift.Test.UserNotFound) do
   defmodule(BinaryProtocol) do
     @moduledoc(false)
     def(deserialize(binary)) do
-      deserialize(binary, %Thrift.Test.UserNotFound{})
+      deserialize(binary, %Thrift.Generator.BinaryProtocolTest.ConstStructVal{})
     end
-    defp(deserialize(<<0, rest::binary>>, %Thrift.Test.UserNotFound{} = acc)) do
+    defp(deserialize(<<0, rest::binary>>, %Thrift.Generator.BinaryProtocolTest.ConstStructVal{} = acc)) do
       {acc, rest}
     end
-    defp(deserialize(<<11, 1::16-signed, string_size::32-signed, value::binary-size(string_size), rest::binary>>, acc)) do
-      deserialize(rest, %{acc | message: value})
+    defp(deserialize(<<3, 1::16-signed, value::8-signed, rest::binary>>, acc)) do
+      deserialize(rest, %{acc | num: value})
     end
     defp(deserialize(<<field_type, _id::16-signed, rest::binary>>, acc)) do
       rest |> Thrift.Protocol.Binary.skip_field(field_type) |> deserialize(acc)
@@ -23,12 +23,12 @@ defmodule(Thrift.Test.UserNotFound) do
     defp(deserialize(_, _)) do
       :error
     end
-    def(serialize(%Thrift.Test.UserNotFound{message: message})) do
-      [case(message) do
+    def(serialize(%Thrift.Generator.BinaryProtocolTest.ConstStructVal{num: num})) do
+      [case(num) do
         nil ->
           <<>>
         _ ->
-          [<<11, 1::16-signed, byte_size(message)::32-signed>> | message]
+          <<3, 1::16-signed, num::8-signed>>
       end | <<0>>]
     end
   end

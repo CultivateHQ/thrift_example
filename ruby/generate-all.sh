@@ -4,4 +4,11 @@
 # You're going to need Thrift installed. https://thrift-tutorial.readthedocs.io/en/latest/installation.html
 # and the thrift binary in your path.
 
- ls thrift/*.thrift | xargs -n 1 thrift -o lib -gen rb
+BASE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/.." && pwd )"
+
+THRIFT_DIR="$BASE_DIR/thrift"
+OUTPUT_DIR="$BASE_DIR/ruby/lib"
+
+
+
+ls "$THRIFT_DIR/" | grep '\.thrift$' | xargs -I % thrift -o ${OUTPUT_DIR} -gen rb "$THRIFT_DIR/%"

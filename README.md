@@ -1,5 +1,5 @@
 # ThriftExample
 
-Example client and server from https://github.com/pinterest/elixir-thrift/blob/master/README.md
-
 Use to experiment with Thrift protocol, mostly.
+
+Now for comparing Ruby and Elixir serialisations.
