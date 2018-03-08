@@ -12,12 +12,14 @@ class Bool
   VAL_MAP = 2
   VAL_SET = 3
   VAL_LIST = 4
+  LARGE_FIELD_ID_VAL = 16
 
   FIELDS = {
     VAL => {:type => ::Thrift::Types::BOOL, :name => 'val', :optional => true},
     VAL_MAP => {:type => ::Thrift::Types::MAP, :name => 'val_map', :key => {:type => ::Thrift::Types::BOOL}, :value => {:type => ::Thrift::Types::BOOL}, :optional => true},
     VAL_SET => {:type => ::Thrift::Types::SET, :name => 'val_set', :element => {:type => ::Thrift::Types::BOOL}, :optional => true},
-    VAL_LIST => {:type => ::Thrift::Types::LIST, :name => 'val_list', :element => {:type => ::Thrift::Types::BOOL}, :optional => true}
+    VAL_LIST => {:type => ::Thrift::Types::LIST, :name => 'val_list', :element => {:type => ::Thrift::Types::BOOL}, :optional => true},
+    LARGE_FIELD_ID_VAL => {:type => ::Thrift::Types::BOOL, :name => 'large_field_id_val', :optional => true}
   }
 
   def struct_fields; FIELDS; end
