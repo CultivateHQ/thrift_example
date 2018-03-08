@@ -15,4 +15,6 @@ protocol =
 
 {out, 0} = System.cmd("ruby", ["ser.rb", protocol, ruby_struct])
 
-IO.inspect(out)
+out
+|> String.trim_trailing()
+|> IO.inspect()
