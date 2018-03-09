@@ -4,7 +4,8 @@ defmodule(Thrift.Generator.BinaryProtocolTest.Bool) do
   _ = "2: map<bool,bool> val_map"
   _ = "3: set<bool> val_set"
   _ = "4: list<bool> val_list"
-  defstruct(val: nil, val_map: nil, val_set: nil, val_list: nil)
+  _ = "16: bool large_field_id_val"
+  defstruct(val: nil, val_map: nil, val_set: nil, val_list: nil, large_field_id_val: nil)
   @type(t :: %__MODULE__{})
   def(new) do
     %__MODULE__{}
@@ -31,6 +32,12 @@ defmodule(Thrift.Generator.BinaryProtocolTest.Bool) do
     end
     defp(deserialize(<<15, 4::16-signed, 2, remaining::32-signed, rest::binary>>, struct)) do
       deserialize__val_list(rest, [[], remaining, struct])
+    end
+    defp(deserialize(<<2, 16::16-signed, 1, rest::binary>>, acc)) do
+      deserialize(rest, %{acc | large_field_id_val: true})
+    end
+    defp(deserialize(<<2, 16::16-signed, 0, rest::binary>>, acc)) do
+      deserialize(rest, %{acc | large_field_id_val: false})
     end
     defp(deserialize(<<field_type, _id::16-signed, rest::binary>>, acc)) do
       rest |> Thrift.Protocol.Binary.skip_field(field_type) |> deserialize(acc)
@@ -83,7 +90,7 @@ defmodule(Thrift.Generator.BinaryProtocolTest.Bool) do
     defp(deserialize__val_set(_, _)) do
       :error
     end
-    def(serialize(%Thrift.Generator.BinaryProtocolTest.Bool{val: val, val_map: val_map, val_set: val_set, val_list: val_list})) do
+    def(serialize(%Thrift.Generator.BinaryProtocolTest.Bool{val: val, val_map: val_map, val_set: val_set, val_list: val_list, large_field_id_val: large_field_id_val})) do
       [case(val) do
         nil ->
           <<>>
@@ -142,6 +149,15 @@ defmodule(Thrift.Generator.BinaryProtocolTest.Bool) do
                 <<1>>
             end
           end]
+      end, case(large_field_id_val) do
+        nil ->
+          <<>>
+        false ->
+          <<2, 16::16-signed, 0>>
+        true ->
+          <<2, 16::16-signed, 1>>
+        _ ->
+          raise(Thrift.InvalidValueError, "Optional boolean field :large_field_id_val on Thrift.Generator.BinaryProtocolTest.Bool must be true, false, or nil")
       end | <<0>>]
     end
   end
