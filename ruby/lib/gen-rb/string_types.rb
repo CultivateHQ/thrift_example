@@ -6,7 +6,7 @@
 
 require 'thrift'
 
-class String
+class TString
   include ::Thrift::Struct, ::Thrift::Struct_Union
   VAL = 1
   VAL_MAP = 2
