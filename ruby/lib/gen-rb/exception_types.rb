@@ -40,7 +40,7 @@ class Ex2 < ::Thrift::Exception
   ::Thrift::Struct.generate_accessors self
 end
 
-class Exception
+class TException
   include ::Thrift::Struct, ::Thrift::Struct_Union
   VAL = 1
   VAL_MAP = 2

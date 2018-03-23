@@ -22,7 +22,7 @@ class Val
   ::Thrift::Struct.generate_accessors self
 end
 
-class Struct
+class TStruct
   include ::Thrift::Struct, ::Thrift::Struct_Union
   VAL = 1
   VAL_MAP = 2
