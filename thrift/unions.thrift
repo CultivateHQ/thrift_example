@@ -1,4 +1,4 @@
-namespace elixir Thrift.Generator.BinaryProtocolTest
+namespace elixir Thrift.Generator.CompactProtocolTest
 struct StructValue {
   1: optional string username;
 }
@@ -7,6 +7,8 @@ union Union {
   2: StructValue struct_field,
   3: string string_field,
   4: list<i16> list_field;
+  5: bool bool_field;
+  6: map<byte, bool> map_field;
 }
 
 struct UStruct {

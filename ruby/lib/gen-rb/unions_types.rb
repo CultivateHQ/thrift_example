@@ -40,18 +40,30 @@ class Union < ::Thrift::Union
     def list_field(val)
       Union.new(:list_field, val)
     end
+
+    def bool_field(val)
+      Union.new(:bool_field, val)
+    end
+
+    def map_field(val)
+      Union.new(:map_field, val)
+    end
   end
 
   INT_FIELD = 1
   STRUCT_FIELD = 2
   STRING_FIELD = 3
   LIST_FIELD = 4
+  BOOL_FIELD = 5
+  MAP_FIELD = 6
 
   FIELDS = {
     INT_FIELD => {:type => ::Thrift::Types::I64, :name => 'int_field', :optional => true},
     STRUCT_FIELD => {:type => ::Thrift::Types::STRUCT, :name => 'struct_field', :class => ::StructValue, :optional => true},
     STRING_FIELD => {:type => ::Thrift::Types::STRING, :name => 'string_field', :optional => true},
-    LIST_FIELD => {:type => ::Thrift::Types::LIST, :name => 'list_field', :element => {:type => ::Thrift::Types::I16}, :optional => true}
+    LIST_FIELD => {:type => ::Thrift::Types::LIST, :name => 'list_field', :element => {:type => ::Thrift::Types::I16}, :optional => true},
+    BOOL_FIELD => {:type => ::Thrift::Types::BOOL, :name => 'bool_field', :optional => true},
+    MAP_FIELD => {:type => ::Thrift::Types::MAP, :name => 'map_field', :key => {:type => ::Thrift::Types::BYTE}, :value => {:type => ::Thrift::Types::BOOL}, :optional => true}
   }
 
   def struct_fields; FIELDS; end
